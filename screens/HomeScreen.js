@@ -11,6 +11,7 @@ export function HomeScreen({navigation}) {
   useEffect(() => {
     setTask(data);
     console.log('asdf');
+    console.log('iofg');
   }, []);
 
   function addNewToTo() {
