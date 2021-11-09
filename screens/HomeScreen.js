@@ -1,26 +1,24 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
-import { useState, useEffect } from 'react';
-import { HomeStyle } from './HomeStyle';
-import { FAB, Appbar, List, Checkbox, Divider } from 'react-native-paper';
+import {View, FlatList} from 'react-native';
+import {useState, useEffect} from 'react';
+import {HomeStyle} from './HomeStyle';
+import {FAB, Appbar, List, Checkbox, Divider} from 'react-native-paper';
 const data = require('./todo.json');
-export function HomeScreen({ navigation }) {
+export function HomeScreen({navigation}) {
   const [Task, setTask] = useState(null);
-  const [reload, setreload] = useState(true)
+  const [reload, setreload] = useState(true);
 
   useEffect(() => {
     setTask(data);
+    console.log('asdf');
   }, []);
 
   function addNewToTo() {
     // TODO: Your logic here
-    setreload(!reload)
+    setreload(!reload);
   }
 
-  function Item({
-    item,
-    index
-  }) {
+  function Item({item, index}) {
     return (
       <View>
         <List.Item
@@ -28,14 +26,14 @@ export function HomeScreen({ navigation }) {
           description={item.description}
           left={() => (
             <Checkbox
-              color={"#6200ee"}
+              color={'#6200ee'}
               status={item.completed ? 'checked' : 'unchecked'}
               onPress={() => {
                 let taskArray = Task;
-                let updatedObj = { ...item, completed: !item.completed };
+                let updatedObj = {...item, completed: !item.completed};
                 taskArray[index] = updatedObj;
                 setTask(taskArray);
-                setreload(!reload)
+                setreload(!reload);
               }}
             />
           )}
@@ -56,16 +54,11 @@ export function HomeScreen({ navigation }) {
         }}
         data={Task ? Task : []}
         keyExtractor={(item, index) => item.id}
-        renderItem={({ item, index }) => (
-          <Item
-            item={item}
-            index={index}
-          />
-        )}
+        renderItem={({item, index}) => <Item item={item} index={index} />}
       />
       <FAB
         style={HomeStyle.fab}
-        color={"#6200ee"}
+        color={'#6200ee'}
         icon="plus"
         onPress={() => {
           navigation.navigate('ADD');
